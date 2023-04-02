@@ -9,7 +9,7 @@ let winPos = [
     [2, 5, 8],
     [3, 6, 9],
     [1, 5, 9],
-    [3, 5, 7],
+    [3, 5, 7]
 ];
 
 function checkWin() {
@@ -37,7 +37,7 @@ function checkWin() {
         }
     }
 
-    // Check for tie
+    // Check là đã đánh hay chưa :v
     for (let i = 1; i <= 9; i++) {
         if (document.getElementById(i.toString()).innerHTML !== "") {
             counter++;
@@ -87,6 +87,6 @@ document.getElementById("reset").addEventListener("click", function () {
         document.getElementById(i.toString()).classList.remove("o");
         document.getElementById(i.toString()).classList.remove("win");
     }
-    gameEnded = false;
     playerSymbol = "X";
+    gameEnded = false;
 });
