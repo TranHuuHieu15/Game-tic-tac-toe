@@ -1,4 +1,4 @@
-let playerSymbol = "X";
+let playerSymbol = "O";
 let gameEnded = false;
 
 let winPos = [
@@ -16,23 +16,23 @@ function checkWin() {
     let counter = 0;
     for (let i = 0; i < winPos.length; i++) {
         if (
-            document.getElementById(winPos[i][0]).innerHTML === playerSymbol &&
-            document.getElementById(winPos[i][1]).innerHTML === playerSymbol &&
-            document.getElementById(winPos[i][2]).innerHTML === playerSymbol
+            document.getElementById(winPos[i][0]).innerHTML.trim().length > 0 &&
+            document.getElementById(winPos[i][0]).innerHTML === document.getElementById(winPos[i][1]).innerHTML &&
+            document.getElementById(winPos[i][1]).innerHTML === document.getElementById(winPos[i][2]).innerHTML
         ) {
             document.getElementById(winPos[i][0]).classList.add("win");
             document.getElementById(winPos[i][1]).classList.add("win");
             document.getElementById(winPos[i][2]).classList.add("win");
-            gameEnded = true;
 
             setTimeout(function () {
                 Swal.fire({
                     icon: 'success',
-                    title: `${playerSymbol} wins`,
+                    title: `${playerSymbol} chiến thắng`,
                     showConfirmButton: false,
                     timer: 3000
                 })
             }, 500);
+            gameEnded = true;
             return;
         }
     }
@@ -57,22 +57,22 @@ function checkWin() {
     }
 }
 
-// xử lý sự kiện cho các ô đánh
+//xử lý sự kiện cho các ô đánh
 for (let i = 1; i <= 9; i++) {
     document.getElementById(i.toString()).addEventListener(
         "click",
         function () {
             if (this.innerHTML === "" && !gameEnded) {
-
-                this.innerHTML = playerSymbol;
-                this.classList.add(playerSymbol.toLowerCase());
-
+                console.log(`Trước khi click ${playerSymbol}`);
                 // Đổi biển tượng này thành biểu tượng khác cho lượt tiếp theo
                 if (playerSymbol === "X") {
                     playerSymbol = "O"
                 } else {
                     playerSymbol = "X"
                 };
+                console.log(`sau khi click ${playerSymbol}`);
+                this.innerHTML = playerSymbol;
+                this.classList.add(playerSymbol.toLowerCase());
                 checkWin();
             }
         }
@@ -87,6 +87,6 @@ document.getElementById("reset").addEventListener("click", function () {
         document.getElementById(i.toString()).classList.remove("o");
         document.getElementById(i.toString()).classList.remove("win");
     }
-    playerSymbol = "X";
+    playerSymbol = "O";
     gameEnded = false;
 });
